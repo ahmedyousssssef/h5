@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <!-- Employee -->
+
+    <!--<record id="view_organiztion_chart_tree" model="ir.ui.view">-->
+        <!--<field name="name">organiztion.chart.tree</field>-->
+        <!--<field name="model">organiztion.chart</field>-->
+        <!--<field name="arch" type="xml">-->
+                <!--<tree>-->
+                       <!--<field name="department_id"/>-->
+                       <!--<field name="employee_id"/>-->
+                <!--</tree>-->
+        <!--</field>-->
+    <!--</record>-->
+
+    <record id="view_organiztion_chart_form" model="ir.ui.view">
+        <field name="name">organiztion.chart.form</field>
+        <field name="model">organiztion.chart</field>
+        <field name="arch" type="xml">
+             <form>
+                 <header>
+                        <button name="get_full_organizationchart"
+                                string="Get Full Organization Chart"
+                                type="object"
+                                class="oe_stat_button org-chart"/>
+                 </header>
+                 <sheet>
+                     <div class='oe_button_box'>
+                        <button class="oe_stat_button org-chart" special="cancel"
+                            icon="fa-list-ul" >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Hierarchy</span>
+                            </div>
+                        </button>
+                     </div>
+                     <group>
+                         <group>
+                                <field name="department_id"/>
+                                <field name="employee_id" attrs="{'invisible' : [('department_id','!=',False)]}"/>
+                                <field name="manager_id" attrs="{'invisible' : [('department_id','=',False)]}"/>
+                                <!--<field name="employee_id" />-->
+                                <!--<field name="manager_id" />-->
+                         </group>
+                         <!--<group>-->
+                               <!--<field name="employee_id" attrs="{'invisible' : [('manager_id','=',False)]}"/>-->
+                               <!--<field name="employee_id"/>-->
+                         <!--</group>-->
+                     </group>
+                 </sheet>
+             </form>
+
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="org_chart_department_action">
+        <field name="name">Organization Chart</field>
+        <field name="res_model">organiztion.chart</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+    </record>
+
+
+
+  <menuitem id="menu_org_chart_department"
+    name="Organization Chart"
+    action="org_chart_department_action"
+    parent="hr.menu_hr_root"
+    sequence="0"/>
+
+
+
+
+
+    <!--<record id="view_employee_form_inherit" model="ir.ui.view">-->
+        <!--<field name="name">hr.employee.form.inherit</field>-->
+        <!--<field name="model">hr.employee</field>-->
+        <!--<field name="inherit_id" ref="hr.view_employee_form" />-->
+        <!--<field name="arch" type="xml">-->
+
+            <!--<xpath expr="//div[@class='oe_button_box']" position="inside">-->
+                <!--<button class="oe_stat_button org-chart" special="cancel"-->
+                    <!--icon="fa-list-ul" >-->
+                    <!--<div class="o_stat_info">-->
+                        <!--<span class="o_stat_text">Hierarchy</span>-->
+                    <!--</div>-->
+                <!--</button>-->
+
+            <!--</xpath>-->
+        <!--</field>-->
+    <!--</record>-->
+
+</openerp>
